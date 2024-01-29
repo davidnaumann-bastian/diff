@@ -1,0 +1,2 @@
+[run]
+omit = dir_diff_tool/cli.py
