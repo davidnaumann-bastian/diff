@@ -1,8 +1,8 @@
 import difflib
 from typing import List, Optional
 from pathlib import Path
-from dir_diff_tool.file import collect_files, generate_output
-from dir_diff_tool.diff_data import DiffData
+from diff.file import collect_files, generate_output
+from diff.diff_data import DiffData
 
 
 def generate_htmls(

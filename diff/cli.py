@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from dir_diff_tool.diff import generate_diff
+from diff.diff import generate_diff
 
 class DirDiffToolCli:
     def __init__(self) -> None:

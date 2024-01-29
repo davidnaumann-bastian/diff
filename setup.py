@@ -13,7 +13,7 @@ DEV_REQUIREMENTS = [
 ]
 
 setuptools.setup(
-    name='dir-diff-tool',
+    name='diff',
     version='1.0.0',
     description='Display a diff between two directories in HTML.',
     long_description=long_description,
@@ -32,7 +32,7 @@ setuptools.setup(
     },
     entry_points={
         'console_scripts': [
-            'dir_diff-tool=dir_diff_tool.cli:main',
+            'diff=diff.cli:main',
         ],
     },
     python_requires='>=3.7, <4',

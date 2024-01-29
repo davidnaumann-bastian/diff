@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import Tuple, List
-from dir_diff_tool.diff_data import DiffData
+from diff.diff_data import DiffData
 
 def collect_files(
     base_path: Path,
