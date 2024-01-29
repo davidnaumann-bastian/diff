@@ -36,6 +36,8 @@ def generate_output(
     htmls: List[DiffData]
 ):
     output_path.mkdir(parents=True, exist_ok=True)
+    with open(output_path.joinpath('.gitignore'), 'w') as gitignore:
+        gitignore.write("*\n")
     for diff_data in htmls:
         with open(output_path.joinpath(diff_data.file_name), "w") as f:
             f.write(diff_data.html)
