@@ -7,6 +7,7 @@ import shutil
 from multiprocessing import Pool
 from time import time
 from functools import partial
+import re
 
 STATIC_FILES = [
     "bootstrap.min.css",
@@ -22,10 +23,10 @@ env = Environment(
 def collect_files(
     base_path: Path,
     secondary_path: Path,
-    exts: List[str]
+    regex: str
 ) -> Tuple[dict, dict]:
-    base_files = collect_files_from_path(base_path, exts=exts)
-    secondary_files = collect_files_from_path(secondary_path, exts=exts)
+    base_files = collect_files_from_path(base_path, regex=regex)
+    secondary_files = collect_files_from_path(secondary_path, regex=regex)
     keys = set(base_files.keys()).union(set(secondary_files.keys()))
     for key in keys:
         if key not in base_files:
@@ -35,19 +36,16 @@ def collect_files(
     return base_files, secondary_files
 
 
-def collect_files_from_path(path: Path, exts: List[str]):
+def collect_files_from_path(path: Path, regex: str):
+    pattern = re.compile(regex)
     file_paths = [
-        file_path for file_path in path.iterdir() if file_path.is_file() and (any(ext in file_path.name for ext in exts) or len(exts) == 0)
+        file_path for file_path in path.iterdir() if file_path.is_file() and pattern.search(file_path.name)
     ]
     files = {}
-    start_time = time()
     with Pool(processes=5) as pool:
         map_result = pool.map_async(_read_file, file_paths)
         for result in map_result.get():
             files[result[0].name] = result[1]
-    end_time = time()
-    elasped_time = end_time - start_time
-    print(elasped_time)
     return files
 
 def _read_file(file_path: Path):

@@ -22,12 +22,11 @@ class DiffScript:
             help='The path to the second directory to compare the base directory to.',
         )
         parser.add_argument(
-            '-e',
-            '--extensions',
-            nargs='*',
+            '-r',
+            '--regex',
             required=False,
             type=str,
-            default=[]
+            default='.*'
         )
         parser.add_argument(
             '-o',
@@ -42,7 +41,7 @@ class DiffScript:
     def run(self):
         base_path = Path(self.directory1)
         secondary_path = Path(self.directory2)
-        exts = self.extensions
+        regex = self.regex
         assert base_path.exists(), f"{base_path} doesn't exist or could not be found."
         assert secondary_path.exists(), f"{secondary_path} doesn't exist or could not be found."
         assert base_path.is_dir(), f"{base_path} is not a directory."
@@ -50,7 +49,7 @@ class DiffScript:
         generate_diff(
             base_path=base_path,
             secondary_path=secondary_path,
-            exts=exts
+            regex=regex
         )
 
 
