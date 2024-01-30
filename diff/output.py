@@ -12,7 +12,8 @@ STATIC_FILES = [
     "bootstrap.min.css",
     "bootstrap.min.js",
     "sortable.min.css",
-    "sortable.min.js"
+    "sortable.min.js",
+    "diff.css"
 ]
 
 env = Environment(
@@ -98,7 +99,7 @@ def _generate_html(
     base_file: List[str],
     secondary_file: List[str]
 ) -> DiffData:
-        html = difflib.HtmlDiff().make_file(
+        table = difflib.HtmlDiff().make_table(
             fromlines=base_file,
             tolines=secondary_file
         )
@@ -110,7 +111,7 @@ def _generate_html(
             file_name=file_name,
             link=file_name+".html",
             percent_match=ratio*100,
-            html=html
+            table=table
         )
         return diff_data
 
@@ -129,5 +130,9 @@ def _generate_diff_page(
     diff_data: DiffData,
     output_path: Path
 ):
+    template = env.get_template("diff.html")
+    content = template.render(
+        diff_data=diff_data
+    )
     with open(output_path.joinpath(diff_data.link), "w") as f:
-        f.write(diff_data.html)
+        f.write(content)
