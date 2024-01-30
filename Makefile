@@ -1,6 +1,6 @@
 PYTHON_BINARY := python3
 VIRTUAL_BIN := venv/bin
-PROJECT_NAME := dir_diff_tool
+PROJECT_NAME := diff
 
 ## help - Display help about make targets for this Makefile
 help:
