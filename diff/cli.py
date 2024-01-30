@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 from diff.diff import generate_diff
 
-class DirDiffToolCli:
+class DiffScript:
     def __init__(self) -> None:
         parser = argparse.ArgumentParser(
             description='Display a diff between two directories in HTML.'
@@ -55,7 +55,7 @@ class DirDiffToolCli:
 
 
 def main():
-    DirDiffToolCli().run()
+    DiffScript().run()
 
 if __name__ == "__main__":
     main()
