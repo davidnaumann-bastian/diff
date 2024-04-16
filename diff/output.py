@@ -50,8 +50,6 @@ def generate_output(
     htmls: List[HTML] = _generate_htmls(files=files)
     _generate_index(output_path=output_path, htmls=htmls)
     # Generate difference pages
-    # TODO: at some point want to migrate this
-    # to custom templated .html files
     _generate_diff_pages(output_path=output_path, htmls=htmls)
     return
 
