@@ -17,14 +17,14 @@
             <th scope="col">Percent</th>
         </tr>
     </thead>
-    {% for diff_data in htmls %}
+    {% for html in htmls %}
     <tr>
         <td>
-            <a href="{{ diff_data.link }}">
-                {{ diff_data.file_name }}
+            <a href="{{ html.link }}">
+                {{ html.file_name }}
             </a>
         </td>
-        <td>{{diff_data.percent_match}}</td>
+        <td>{{html.percent_match}}</td>
     </tr>
     {% endfor %}
   </table>
